@@ -93,5 +93,5 @@ if valence_e <= 4:
 elif valence_e > 4 and valence_e < 9:
     valency = 8 - valence_e
 
-print(valency)
+
 
