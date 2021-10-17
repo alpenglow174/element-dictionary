@@ -8,8 +8,8 @@ element_symb = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"
 
 electron_shell = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5p", "6s", "4f", "5d", "6p", "7s", "5f", "6d", "7p", "8s", "5g", "6f", "7d", "8p"]
 
-# Code to format all input text to lowercase and spaceless
 
+# Code to format all input text to lowercase and spaceless
 
 def text_clean(textout):
     textout = textout.lower().strip().split()
