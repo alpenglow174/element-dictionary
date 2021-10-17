@@ -44,6 +44,7 @@ elif input_type == 2:
     atomic_num = element_symb.index(element_symb_input.capitalize()) + 1
 elif input_type == 3:
     atomic_num = input_checker()
+print(atomic_num)
 
 # Program to find KLMN configuration and valency from atomic number
 # Find EC in Bohr model (KLMN)
