@@ -27,6 +27,8 @@ def input_checker():
         if atomic_num < 1:
             print(">> Sorry that is the incorrect input try again")
             continue
+        elif atomic_num > 118:
+            print(">> Sorry that is the incorrect input try again")
         else:
             break
     return atomic_num
