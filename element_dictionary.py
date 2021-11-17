@@ -8,14 +8,11 @@ element_symb = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"
 
 electron_shell = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5p", "6s", "4f", "5d", "6p", "7s", "5f", "6d", "7p", "8s", "5g", "6f", "7d", "8p"]
 
-
 # Code to format all input text to lowercase and spaceless
-
 def text_clean(textout):
     textout = textout.lower().strip().split()
     textout = "".join(textout)
     return textout
-
 
 def input_checker():
     while True:
@@ -33,6 +30,31 @@ def input_checker():
             break
     return atomic_num
 
+# Function to find the maxshell capacity of an orbital
+def maxShellLimit(shell):
+    if shell[1] == 's':
+        return 2    
+    elif shell[1] == 'p':
+        return 6
+    elif shell[1] == 'd':
+        return 10
+    elif shell[1] == 'f':
+        return 14
+
+# Function to calculate the electronic configuration of the element
+def electronic_configuration(atomic_num):
+    i = 0
+    ec = ''
+    while atomic_num > 0:
+        x = electron_shell[i]
+        if atomic_num >= maxShellLimit(x):
+            ec = ec + x + str(maxShellLimit(x)) + ' '
+            atomic_num -= maxShellLimit(x)
+        elif atomic_num < maxShellLimit(x):
+            ec = ec + x + str(atomic_num) + ' '
+            atomic_num = 0
+        i += 1
+    return ec
 
 # Component to input data and determine atomic number
 atomic_num = None
@@ -46,54 +68,8 @@ elif input_type == 2:
     atomic_num = element_symb.index(element_symb_input.capitalize()) + 1
 elif input_type == 3:
     atomic_num = input_checker()
+
+#For later formatting convenience
+print(element_name[atomic_num - 1], "-")#Displays element for reference during testing
 print(atomic_num)
-
-# Program to find KLMN configuration and valency from atomic number
-# Find EC in Bohr model (KLMN)
-K, L, M, N = 0, 0, 0, 0
-EC_var = atomic_num
-
-# 2,8,8,16,16,32
-
-while EC_var > 0:
-    if K+1 < 3:  # +1 because base is 0 and it will run 3 times otherwise
-        # fill 2 in K
-        K += 1
-        EC_var -= 1
-    elif L+1 < 9:
-        # fill 8 in L
-        L += 1
-        EC_var -= 1
-    elif M+1 < 9:
-        # fill 8 in M
-        M += 1
-        EC_var -= 1
-    elif N+1 < 17:
-        # fill 16 in N
-        N += 1
-        EC_var -= 1
-print(K,",", L,",", M,",", N)
-
-# Valency
-valency = 0
-valence_e = 0
-
-# Setting no of valence electrons
-if N > 0:
-    # no of valence electrons is no of electrons is N
-    valence_e = N
-elif M > 0:
-    valence_e = M
-elif L > 0:
-    valence_e = L
-elif K > 0:
-    valence_e = K
-
-# finding valency
-if valence_e <= 4:
-    valency = valence_e
-elif valence_e > 4 and valence_e < 9:
-    valency = 8 - valence_e
-
-
-
+print(electronic_configuration(atomic_num))
