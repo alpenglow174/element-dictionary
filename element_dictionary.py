@@ -70,6 +70,6 @@ elif input_type == 3:
     atomic_num = input_checker()
 
 #For later formatting convenience
-print(element_name[atomic_num - 1], "-")#Displays element for reference during testing
+print(element_name[atomic_num - 1], "-") #Displays element for reference during testing
 print(atomic_num)
 print(electronic_configuration(atomic_num))
