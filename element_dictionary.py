@@ -43,15 +43,15 @@ def maxShellLimit(shell):
 
 # Function to calculate the electronic configuration of the element
 def electronic_configuration(atomic_num):
-    i = 0
-    ec = ''
+    i = 0 # variable to traverse shell list
+    ec = '' # variable for final electronic configuration
     while atomic_num > 0:
         x = electron_shell[i]
         if atomic_num >= maxShellLimit(x):
-            ec = ec + x + str(maxShellLimit(x)) + ' '
+            ec = ec + x + '^' + str(maxShellLimit(x)) + '-'
             atomic_num -= maxShellLimit(x)
         elif atomic_num < maxShellLimit(x):
-            ec = ec + x + str(atomic_num) + ' '
+            ec = ec + x + '^' + str(atomic_num) + '-'
             atomic_num = 0
         i += 1
     return ec
