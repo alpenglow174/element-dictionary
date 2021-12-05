@@ -105,7 +105,7 @@ print(K, L, M, N)
 '''
 valency
 '''
-valency = 0
+'''valency = 0
 valence_e = 0
 
 # setting no of valence electrons
@@ -119,10 +119,10 @@ elif L > 0:
 elif K > 0:
     valence_e = K
 
-# finding valency
+ finding valency
 if valence_e <= 4:
     valency = valence_e
 elif valence_e > 4 and valence_e < 9:
     valency = 8 - valence_e
 
-print(valency)
+print(valency)'''
