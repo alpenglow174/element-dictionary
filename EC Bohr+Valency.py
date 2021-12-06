@@ -8,6 +8,81 @@ EC_var = atomic_num
 # Cr, Cu, Nb, Pd, Ce, Ce, Tb, Pa, Bk
 # 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p, 7s, 5f, 6d, 7p, 8s, 5g, 6f, 7d, 8p, and 9s
 
+#the exceptions:
+if atomic_num == 24:#Cr
+    K = 2
+    L = 8
+    M = 13
+    N = 1
+    O = 0
+    P = 0
+    Q = 0
+    R = 0
+elif atomic_num == 29:#Cu
+    K = 2
+    L = 8
+    M = 18
+    N = 1
+    O = 0
+    P = 0
+    Q = 0
+    R = 0
+elif atomic_num == 41:#Nb
+    K = 2
+    L = 8
+    M = 18
+    N = 12
+    O = 1
+    P = 0
+    Q = 0
+    R = 0
+elif atomic_num == 46:#Pd
+    K = 2
+    L = 8
+    M = 18
+    N = 18
+    O = 0
+    P = 0
+    Q = 0
+    R = 0
+elif atomic_num == 58:#Ce
+    K = 2
+    L = 8
+    M = 18
+    N = 20
+    O = 8
+    P = 2
+    Q = 0
+    R = 0
+elif atomic_num == 65:#Tb
+    K = 2
+    L = 8
+    M = 18
+    N = 27
+    O = 8
+    P = 2
+    Q = 0
+    R = 0
+elif atomic_num == 91:#Pa
+    K = 2
+    L = 8
+    M = 18
+    N = 32
+    O = 20
+    P = 9
+    Q = 2
+    R = 0
+elif atomic_num == 97:#Bk
+    K = 2
+    L = 8
+    M = 18
+    N = 32
+    O = 27
+    P = 8
+    Q = 2
+    R = 0
+
+
 while EC_var > 0: #Transition elements valency
     if K+1 < 3:  # +1 because base is 0 and it will run 3 times otherwise
         # fill 2 in K
