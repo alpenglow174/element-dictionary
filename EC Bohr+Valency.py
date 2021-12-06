@@ -105,12 +105,20 @@ print(K, L, M, N)
 '''
 valency
 '''
-'''valency = 0
+valency = 0
 valence_e = 0
 
-# setting no of valence electrons
-if N > 0:
+# setting no of valence electrons (KLMNOPQR)
+if R > 0:
     # no of valence electrons is no of electrons is N
+    valence_e = R
+elif Q > 0:
+    valence_e = N
+elif P > 0:
+    valence_e = M
+elif O > 0:
+    valence_e = M
+elif N > 0:
     valence_e = N
 elif M > 0:
     valence_e = M
@@ -119,10 +127,12 @@ elif L > 0:
 elif K > 0:
     valence_e = K
 
+'''
 #finding valency
 if valence_e <= 4:
     valency = valence_e
 elif valence_e > 4 and valence_e < 9:
     valency = 8 - valence_e
 
-print(valency)'''
+print(valency)
+'''
