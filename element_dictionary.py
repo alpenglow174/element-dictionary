@@ -71,8 +71,6 @@ def atomic_Number():
         atomic_num = input_checker()
     return atomic_num
 
-atomicNumber = atomic_Number()
-
 def bohrEc():
     # Find EC in Bohr model (KLMN)
     K, L, M, N, O, P, Q, R = 0, 0, 0, 0, 0, 0, 0, 0
@@ -284,11 +282,12 @@ def bohrEc():
     '''
     return K,L,M,N,O,P,Q,R
 
-#For later formatting convenience
-print(">>",element_name[atomicNumber - 1], "<<") #Displays element for reference during testing
-print("  >> Atomic number            >> ",atomicNumber)
-print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
-print("  >> Bohr Configuration       >> ",bohrEc())
-
-
-
+program_state = "r"
+while program_state == "r":
+    atomicNumber = atomic_Number()
+    #For later formatting convenience
+    print(">>",element_name[atomicNumber - 1], "<<") #Displays element for reference during testing
+    print("  >> Atomic number            >> ",atomicNumber)
+    print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
+    print("  >> Bohr Configuration       >> ",bohrEc())
+    program_state = input(">> Press r to restart program and q to quit >> ")
