@@ -100,7 +100,7 @@ while EC_var > 0: #Transition elements valency
         EC_var -= 1
     
 
-print(K, L, M, N)
+print(K, L, M, N, O, P, Q, R)
 
 '''
 valency
@@ -119,10 +119,22 @@ elif L > 0:
 elif K > 0:
     valence_e = K
 
- finding valency
+#finding valency
 if valence_e <= 4:
     valency = valence_e
 elif valence_e > 4 and valence_e < 9:
     valency = 8 - valence_e
 
 print(valency)'''
+
+#group and period
+
+period_temp = 9 #temporary period
+
+SHELL = [R, Q, P, O, N,  M, L, K ] #list of shells
+for i in SHELL:
+    period_temp-=1
+    if i>0:
+        period = period_temp
+        break #to stop loop and not continue
+print('PERIOD =',period)
