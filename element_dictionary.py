@@ -11,8 +11,10 @@ element_symb = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"
 
 electron_shell = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5p", "6s", "4f", "5d", "6p", "7s", "5f", "6d", "7p", "8s", "5g", "6f", "7d", "8p"]
 
-superScript = [0, "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰", "¹¹", "¹²", "¹³", "¹⁴"] 
 
+'''
+INPUT
+'''
 # Code to format all input text to lowercase and spaceless
 def text_clean(textout):
     textout = textout.lower().strip().split()
@@ -57,32 +59,12 @@ def electronic_configuration(atomic_num):
     while atomic_num > 0:
         x = electron_shell[i]
         if atomic_num >= maxShellLimit(x):
-            ec = ec + x + superScript[maxShellLimit(x)]
+            ec = ec + x + '^' + str(maxShellLimit(x)) + '-'
             atomic_num -= maxShellLimit(x)
         elif atomic_num < maxShellLimit(x):
-            ec = ec + x + superScript[atomic_num]
+            ec = ec + x + '^' + str(atomic_num) + '-'
             atomic_num = 0
         i += 1
-    #Exceptions
-    if atomic_num == 24: #Cr
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d⁵'
-    elif atomic_num == 29: #Cu
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d¹⁰'
-    elif atomic_num == 41: #Nb
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁴'
-    elif atomic_num == 46: #Pd
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s⁰ 4d¹⁰'
-    elif atomic_num == 58: #Ce
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f²'
-    elif atomic_num == 65: #Tb
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁹'
-    elif atomic_num == 91: #Pa
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f² 6d¹'
-    elif atomic_num == 97: #Bk
-        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁹'
-
-
-
     return ec
 
 def atomic_Number():
@@ -312,13 +294,11 @@ def bohrEc():
     return K,L,M,N,O,P,Q,R
 
 def bohrPrint(ec):
-    print (ec)
-    nonZeroEc = ""
+    ecString = ''
     for i in ec:
-        if not i== 0:
-            nonZeroEc+=str(i)
-    nonZeroEc=nonZeroEc.strip()
-    return nonZeroEc
+        ecString+=str(i)
+        ecString+=', '
+    return ecString.rstrip(', ')
 
 
 '''
