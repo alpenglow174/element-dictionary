@@ -8,6 +8,8 @@ element_symb = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"
 
 electron_shell = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5p", "6s", "4f", "5d", "6p", "7s", "5f", "6d", "7p", "8s", "5g", "6f", "7d", "8p"]
 
+superScript = [0, "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰", "¹¹", "¹²", "¹³", "¹⁴"] 
+
 # Code to format all input text to lowercase and spaceless
 def text_clean(textout):
     textout = textout.lower().strip().split()
@@ -48,10 +50,10 @@ def electronic_configuration(atomic_num):
     while atomic_num > 0:
         x = electron_shell[i]
         if atomic_num >= maxShellLimit(x):
-            ec = ec + x + '^' + str(maxShellLimit(x)) + '-'
+            ec = ec + x + superScript[maxShellLimit(x)]
             atomic_num -= maxShellLimit(x)
         elif atomic_num < maxShellLimit(x):
-            ec = ec + x + '^' + str(atomic_num) + '-'
+            ec = ec + x + superScript[atomic_num]
             atomic_num = 0
         i += 1
     return ec
