@@ -66,6 +66,23 @@ def electronic_configuration(atomic_num):
             ec = ec + x + str(superScript[atomic_num])
             atomic_num = 0
         i += 1
+    #Exceptions
+    if atomic_num == 24: #Cr
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d⁵'
+    elif atomic_num == 29: #Cu
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d¹⁰'
+    elif atomic_num == 41: #Nb
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁴'
+    elif atomic_num == 46: #Pd
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s⁰ 4d¹⁰'
+    elif atomic_num == 58: #Ce
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f²'
+    elif atomic_num == 65: #Tb
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁹'
+    elif atomic_num == 91: #Pa
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f² 6d¹'
+    elif atomic_num == 97: #Bk
+        ec = '1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁹'
     return ec
 
 def atomic_Number():
@@ -297,6 +314,8 @@ def bohrEc():
 def bohrPrint(ec):
     ecString = ''
     for i in ec:
+        if i == 0:
+            continue
         ecString+=str(i)
         ecString+=', '
     return ecString.rstrip(', ')
@@ -312,5 +331,5 @@ while program_state == "r":
     print(">>",element_name[atomicNumber - 1], "<<") #Displays element for reference during testing
     print("  >> Atomic number            >> ",atomicNumber)
     print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
-    print("  >> Bohr Configuration       >> ",bohrEc())
+    print("  >> Bohr Configuration       >> ",bohrPrint(bohrEc()))
     program_state = input(">> Press r to restart program and q to quit >> ")
