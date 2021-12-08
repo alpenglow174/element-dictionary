@@ -147,3 +147,5 @@ for i in SHELL:
         period = period_temp
         break #to stop loop and not continue
 print('PERIOD =',period)
+
+def testing_part1(choco)
