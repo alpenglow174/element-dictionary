@@ -300,16 +300,17 @@ def bohrEc():
         valence_e = L
     elif K > 0:
         valence_e = K
+    
+    period_temp = 9 #temporary period
+    SHELL = [R, Q, P, O, N,  M, L, K ] #list of shells
+    for i in SHELL:
+        period_temp-=1
+        if i>0:
+            period = period_temp
+            break #to stop loop and not continue
 
-    '''
-    #finding valency
-    if valence_e <= 4:
-        valency = valence_e
-    elif valence_e > 4 and valence_e < 9:
-        valency = 8 - valence_e
-    print(valency)
-    '''
     return K,L,M,N,O,P,Q,R
+
 
 def bohrPrint(ec):
     ecString = ''
@@ -319,6 +320,7 @@ def bohrPrint(ec):
         ecString+=str(i)
         ecString+=', '
     return ecString.rstrip(', ')
+
 
 
 '''
