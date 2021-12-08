@@ -293,6 +293,15 @@ def bohrEc():
     '''
     return K,L,M,N,O,P,Q,R
 
+def bohrPrint(ec):
+    print (ec)
+    nonZeroEc = ''
+    for i in ec:
+        if not i== 0:
+            nonZeroEc+=i
+    nonZeroEc=nonZeroEc.strip()
+    return nonZeroEc
+
 
 '''
 OUTPUT
