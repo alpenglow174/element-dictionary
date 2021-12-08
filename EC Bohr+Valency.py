@@ -101,7 +101,7 @@ while EC_var > 0: #Transition elements valency
         EC_var -= 1
     
 
-print(K, L, M, N, O, P, Q, R)
+print(K, L, M, N, O, P, Q, '1s²')
 
 '''
 valency
