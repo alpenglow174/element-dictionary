@@ -1,5 +1,8 @@
+'''
+Database for program
+'''
 # Accept name or abbreviation of element and return its atomic number
-# Database for program
+
 element_name = ["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon", "Sodium", "Magnesium", "Aluminum", "Silicon", "Phosphorus", "Sulfur", "Chlorine", "Argon", "Potassium", "Calcium", "Scandium", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Germanium", "Arsenic", "Selenium", "Bromine", "Krypton", "Rubidium", "Strontium", "Yttrium", "Zirconium", "Niobium", "Molybdenum", "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silver", "Cadmium", "Indium", "Tin", "Antimony", "Tellurium", "Iodine", "Xenon", "Cesium", "Barium", "Lanthanum", "Cerium", "Praseodymium", "Neodymium", "Promethium",
                 "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", "Erbium", "Thulium", "Ytterbium", "Lutetium", "Hafnium", "Tantalum", "Tungsten", "Rhenium", "Osmium", "Iridium", "Platinum", "Gold", "Mercury", "Thallium", "Lead", "Bismuth", "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Thorium", "Protactinium", "Uranium", "Neptunium", "Plutonium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Fermium", "Mendelevium", "Nobelium", "Lawrencium", "Rutherfordium", "Dubnium", "Seaborgium", "Bohrium", "Hassium", "Meitnerium", "Darmstadtium", "Roentgenium", "Copernicium", "Nihonium", "Flerovium", "Moscovium", "Livermorium", "Tennessine", "Oganesson"]
 
@@ -32,6 +35,10 @@ def input_checker():
             break
     return atomic_num
 
+
+'''
+Functions/ Calculations
+'''
 # Function to find the maxshell capacity of an orbital
 def maxShellLimit(shell):
     if shell[1] == 's':
@@ -284,6 +291,19 @@ def bohrEc():
     '''
     return K,L,M,N,O,P,Q,R
 
+def bohrPrint(ec):
+    print (ec)
+    nonZeroEc = ""
+    for i in ec:
+        if not i == 0:
+            nonZeroEc += i
+    nonZeroEc=nonZeroEc.strip()
+    return nonZeroEc
+
+
+'''
+OUTPUT
+'''
 program_state = "r"
 while program_state == "r":
     atomicNumber = atomic_Number()
@@ -291,5 +311,5 @@ while program_state == "r":
     print(">>",element_name[atomicNumber - 1], "<<") #Displays element for reference during testing
     print("  >> Atomic number            >> ",atomicNumber)
     print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
-    print("  >> Bohr Configuration       >> ",bohrEc())
+    print("  >> Bohr Configuration       >> ",bohrPrint(bohrEc()))
     program_state = input(">> Press r to restart program and q to quit >> ")
