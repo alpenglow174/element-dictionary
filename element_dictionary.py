@@ -311,5 +311,5 @@ while program_state == "r":
     print(">>",element_name[atomicNumber - 1], "<<") #Displays element for reference during testing
     print("  >> Atomic number            >> ",atomicNumber)
     print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
-    print("  >> Bohr Configuration       >> ",bohrPrint(bohrEc()))
+    print("  >> Bohr Configuration       >> ",bohrEc())
     program_state = input(">> Press r to restart program and q to quit >> ")
