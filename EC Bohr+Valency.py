@@ -8,6 +8,7 @@ EC_var = atomic_num
 # Cr, Cu, Nb, Pd, Ce, Ce, Tb, Pa, Bk
 # 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p, 7s, 5f, 6d, 7p, 8s, 5g, 6f, 7d, 8p, and 9s
 
+
 while EC_var > 0: #Transition elements valency
     if K+1 < 3:  # +1 because base is 0 and it will run 3 times otherwise
         # fill 2 in K
@@ -105,12 +106,20 @@ print(K, L, M, N, O, P, Q, R)
 '''
 valency
 '''
-'''valency = 0
+"""valency = 0
 valence_e = 0
 
-# setting no of valence electrons
-if N > 0:
+# setting no of valence electrons (KLMNOPQR)
+if R > 0:
     # no of valence electrons is no of electrons is N
+    valence_e = R
+elif Q > 0:
+    valence_e = N
+elif P > 0:
+    valence_e = M
+elif O > 0:
+    valence_e = M
+elif N > 0:
     valence_e = N
 elif M > 0:
     valence_e = M
@@ -125,7 +134,7 @@ if valence_e <= 4:
 elif valence_e > 4 and valence_e < 9:
     valency = 8 - valence_e
 
-print(valency)'''
+print(valency)"""
 
 #group and period
 
