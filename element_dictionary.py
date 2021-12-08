@@ -298,7 +298,7 @@ def bohrPrint(ec):
     nonZeroEc = ''
     for i in ec:
         if not i== 0:
-            nonZeroEc+=i
+            nonZeroEc+=str(i)
     nonZeroEc=nonZeroEc.strip()
     return nonZeroEc
 
