@@ -11,6 +11,7 @@ element_symb = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg"
 
 electron_shell = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5p", "6s", "4f", "5d", "6p", "7s", "5f", "6d", "7p", "8s", "5g", "6f", "7d", "8p"]
 
+
 '''
 INPUT
 '''
@@ -36,6 +37,10 @@ def input_checker():
             break
     return atomic_num
 
+
+'''
+Functions/ Calculations
+'''
 # Function to find the maxshell capacity of an orbital
 def maxShellLimit(shell):
     if shell[1] == 's':
@@ -287,6 +292,7 @@ def bohrEc():
     print(valency)
     '''
     return K,L,M,N,O,P,Q,R
+
 
 '''
 OUTPUT
