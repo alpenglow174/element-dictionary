@@ -277,7 +277,7 @@ def bohrEc():
         R = 0
 
     '''
-    valency
+    valenc electron
     '''
     valency = 0
     valence_e = 0

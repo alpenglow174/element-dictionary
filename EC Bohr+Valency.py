@@ -101,7 +101,7 @@ while EC_var > 0: #Transition elements valency
         EC_var -= 1
     
 
-print(K, L, M, N, O, P, Q, '1s²')
+print(K, L, M, N, O, P, Q, R)
 
 '''
 valency
@@ -139,7 +139,6 @@ print(valency)"""
 #group and period
 
 period_temp = 9 #temporary period
-
 SHELL = [R, Q, P, O, N,  M, L, K ] #list of shells
 for i in SHELL:
     period_temp-=1
@@ -147,5 +146,14 @@ for i in SHELL:
         period = period_temp
         break #to stop loop and not continue
 print('PERIOD =',period)
-
-def testing_part1(choco)
+'''
+def period_fun(shell):
+    shell_reverse = shell[::-1]
+    period_temp = 9
+    for i in shell_reverse:
+        period_temp-=1
+        if i>0:
+            period = period_temp
+            break #to stop loop and not continue
+print(period_fun((K,L,M,N,O,P,Q,R)))
+'''
