@@ -51,9 +51,9 @@ def input_checker():
     return atomic_num
 
 def validityChecker(inval,input_type):
-    if input_type == 1 and (inval.capitalize()) in element_name:
+    if input_type == 1 and (text_clean(inval).capitalize()) in element_name:
         return True
-    elif input_type == 2 and (inval.capitalize()) in element_symb:
+    elif input_type == 2 and (text_clean(inval).capitalize()) in element_symb:
         return True
     elif input_type == 3 and inval.isdigit() == True:
         if int(inval) > 0 and int(inval) < 119:
