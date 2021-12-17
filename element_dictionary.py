@@ -100,9 +100,10 @@ def atomic_Number():
         atomic_num = input_checker()
     return atomic_num
 
+K, L, M, N, O, P, Q, R = 0, 0, 0, 0, 0, 0, 0, 0
 def bohrEc():
     # Find EC in Bohr model (KLMN)
-    K, L, M, N, O, P, Q, R = 0, 0, 0, 0, 0, 0, 0, 0
+    global K, L, M, N, O, P, Q, R 
     EC_var = atomicNumber
 
     # 2,8,8,16,16,32
