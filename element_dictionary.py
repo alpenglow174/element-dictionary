@@ -100,10 +100,11 @@ def atomic_Number():
         atomic_num = input_checker()
     return atomic_num
 
-K, L, M, N, O, P, Q, R = 0, 0, 0, 0, 0, 0, 0, 0
+period = 0
+valence_e = 0
 def bohrEc():
     # Find EC in Bohr model (KLMN)
-    global K, L, M, N, O, P, Q, R 
+    K, L, M, N, O, P, Q, R = 0, 0, 0, 0, 0, 0, 0, 0
     EC_var = atomicNumber
 
     # 2,8,8,16,16,32
@@ -280,8 +281,7 @@ def bohrEc():
     '''
     valenc electron
     '''
-    valency = 0
-    valence_e = 0
+    global valence_e 
 
     # setting no of valence electrons (KLMNOPQR)
     if R > 0:
@@ -302,6 +302,7 @@ def bohrEc():
     elif K > 0:
         valence_e = K
     
+    global period #finding period
     period_temp = 9 #temporary period
     SHELL = [R, Q, P, O, N,  M, L, K ] #list of shells
     for i in SHELL:
@@ -335,4 +336,6 @@ while program_state == "r":
     print("  >> Atomic number            >> ",atomicNumber)
     print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
     print("  >> Bohr Configuration       >> ",bohrPrint(bohrEc()))
+    print("  >> Period of element            >> ",period)
+    print("  >> Valence electron           >> ",valence_e)
     program_state = input(">> Press r to restart program and q to quit >> ")
