@@ -110,7 +110,7 @@ def bohrEc():
     # Cr, Cu, Nb, Pd, Ce, Ce, Tb, Pa, Bk
     # 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p, 7s, 5f, 6d, 7p, 8s, 5g, 6f, 7d, 8p, and 9s
 
-
+    
     while EC_var > 0: #Transition elements valency
         if K+1 < 3:  # +1 because base is 0 and it will run 3 times otherwise
             # fill 2 in K
