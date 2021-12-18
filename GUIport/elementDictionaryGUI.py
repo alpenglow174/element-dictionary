@@ -390,7 +390,7 @@ while True:
         print("  >> Atomic number            >> ",atomicNumber)
         print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
         print("  >> Bohr Configuration       >> ",)'''
-        outputStr = ">> " + element_name[atomicNumber - 1] + " <<\n  >> Element Symbol             >> " + element_symb[atomicNumber - 1] + "\n  >> Atomic Number               >> " + str(atomicNumber) + "\n  >> Electronic Configuration >> " + electronic_configuration(atomicNumber) + "\n  >> Bohr Configuration         >>  " + bohrPrint(bohrEc()) + "\n  >> Valence Electrons         >>  " + str(valence_e) + "\n  >> Period         >>  " + str(period)
+        outputStr = ">> " + element_name[atomicNumber - 1] + " <<\n  >> Element Symbol             >> " + element_symb[atomicNumber - 1] + "\n  >> Atomic Number               >> " + str(atomicNumber) + "\n  >> Electronic Configuration >> " + electronic_configuration(atomicNumber) + "\n  >> Bohr Configuration         >>  " + bohrPrint(bohrEc()) + "\n  >> Valence Electrons          >>  " + str(valence_e) + "\n  >> Period Number               >>  " + str(period)
         window['-OUTPUT-'].update(outputStr)
     else: window['-OUTPUT-'].update("\n\n\n\n")
 
