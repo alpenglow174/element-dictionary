@@ -25,6 +25,7 @@ electron_shell = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5
 
 superScript = [0, "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰", "¹¹", "¹²", "¹³", "¹⁴"] 
 
+
 '''
 INPUT
 '''
@@ -122,6 +123,8 @@ def atomic_Number(inval, input_type):
         atomic_num = inval
     return atomic_num
 
+period = 0
+valence_e = 0
 def bohrEc():
     # Find EC in Bohr model (KLMN)
     K, L, M, N, O, P, Q, R = 0, 0, 0, 0, 0, 0, 0, 0
@@ -301,9 +304,8 @@ def bohrEc():
     '''
     valenc electron
     '''
-    valency = 0
-    valence_e = 0
 
+    global valence_e
     # setting no of valence electrons (KLMNOPQR)
     if R > 0:
         # no of valence electrons is no of electrons is N
@@ -323,6 +325,7 @@ def bohrEc():
     elif K > 0:
         valence_e = K
     
+    global period
     period_temp = 9 #temporary period
     SHELL = [R, Q, P, O, N,  M, L, K ] #list of shells
     for i in SHELL:
@@ -330,7 +333,7 @@ def bohrEc():
         if i>0:
             period = period_temp
             break #to stop loop and not continue
-
+    
     return K,L,M,N,O,P,Q,R
 
 
@@ -387,7 +390,7 @@ while True:
         print("  >> Atomic number            >> ",atomicNumber)
         print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
         print("  >> Bohr Configuration       >> ",)'''
-        outputStr = ">> " + element_name[atomicNumber - 1] + " <<\n  >> Element Symbol             >> " + element_symb[atomicNumber - 1] + "\n  >> Atomic Number               >> " + str(atomicNumber) + "\n  >> Electronic Configuration >> " + electronic_configuration(atomicNumber) + "\n  >> Bohr Configuration         >>  " + bohrPrint(bohrEc())
+        outputStr = ">> " + element_name[atomicNumber - 1] + " <<\n  >> Element Symbol             >> " + element_symb[atomicNumber - 1] + "\n  >> Atomic Number               >> " + str(atomicNumber) + "\n  >> Electronic Configuration >> " + electronic_configuration(atomicNumber) + "\n  >> Bohr Configuration         >>  " + bohrPrint(bohrEc()) + "\n  >> Valence Electrons         >>  " + str(valence_e) + "\n  >> Period         >>  " + str(period)
         window['-OUTPUT-'].update(outputStr)
     else: window['-OUTPUT-'].update("\n\n\n\n")
 
