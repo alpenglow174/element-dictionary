@@ -1,3 +1,4 @@
+'''
 atomic_num = int(input("enter Z"))
 
 # Find EC in Bohr model (KLMN)
@@ -103,9 +104,9 @@ while EC_var > 0: #Transition elements valency
 
 print(K, L, M, N, O, P, Q, R)
 
-'''
+
 valency
-'''
+
 """valency = 0
 valence_e = 0
 
@@ -146,7 +147,7 @@ for i in SHELL:
         period = period_temp
         break #to stop loop and not continue
 print('PERIOD =',period)
-'''
+
 def period_fun(shell):
     shell_reverse = shell[::-1]
     period_temp = 9
@@ -156,4 +157,14 @@ def period_fun(shell):
             period = period_temp
             break #to stop loop and not continue
 print(period_fun((K,L,M,N,O,P,Q,R)))
+
 '''
+
+temporary = 0
+def changeTemp(number):
+    global temporary
+    temporary = 5
+    return temporary
+print(changeTemp(temporary))
+print(temporary)
+
