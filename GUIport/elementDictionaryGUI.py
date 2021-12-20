@@ -123,6 +123,15 @@ def atomic_Number(inval, input_type):
         atomic_num = inval
     return atomic_num
 
+'''
+TRANSITION
+'''
+def isTransition(z):
+    if 20 < z < 31 or  38 < z < 49 or  56 < z < 81 or  88 < z < 113:
+        return True 
+    else:
+        return False
+
 period = 0
 valence_e = 0
 def bohrEc():
@@ -134,7 +143,7 @@ def bohrEc():
     # Cr, Cu, Nb, Pd, Ce, Ce, Tb, Pa, Bk
     # 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p, 7s, 5f, 6d, 7p, 8s, 5g, 6f, 7d, 8p, and 9s
 
-
+    
     while EC_var > 0: #Transition elements valency
         if K+1 < 3:  # +1 because base is 0 and it will run 3 times otherwise
             # fill 2 in K
@@ -302,30 +311,31 @@ def bohrEc():
         R = 0
 
     '''
-    valenc electron
+    valence electron
     '''
-
-    global valence_e
-    # setting no of valence electrons (KLMNOPQR)
-    if R > 0:
-        # no of valence electrons is no of electrons is N
-        valence_e = R
-    elif Q > 0:
-        valence_e = Q
-    elif P > 0:
-        valence_e = P
-    elif O > 0:
-        valence_e = O
-    elif N > 0:
-        valence_e = N
-    elif M > 0:
-        valence_e = M
-    elif L > 0:
-        valence_e = L
-    elif K > 0:
-        valence_e = K
-    
-    global period
+    global valence_e 
+    if isTransition(atomicNumber) == False :
+        # setting no of valence electrons (KLMNOPQR)
+        if R > 0:
+            # no of valence electrons is no of electrons is N
+            valence_e = R
+        elif Q > 0:
+            valence_e = Q
+        elif P > 0:
+            valence_e = P
+        elif O > 0:
+            valence_e = O
+        elif N > 0:
+            valence_e = N
+        elif M > 0:
+            valence_e = M
+        elif L > 0:
+            valence_e = L
+        elif K > 0:
+            valence_e = K
+    else:
+        valence_e = ('Transition Element')
+    global period #finding period
     period_temp = 9 #temporary period
     SHELL = [R, Q, P, O, N,  M, L, K ] #list of shells
     for i in SHELL:
@@ -333,8 +343,38 @@ def bohrEc():
         if i>0:
             period = period_temp
             break #to stop loop and not continue
-    
+
     return K,L,M,N,O,P,Q,R
+
+def findGroup(z, valence_e):
+    group = 0
+    if isTransition(z) == False:
+        if z == 1:
+            return ('NO FIXED POSITION')
+        elif z == 2:
+            group = 18
+        elif valence_e <= 2 :
+            group = valence_e
+        elif valence_e >= 3 :
+            group = valence_e + 10
+        return group
+    else:
+        return ('Transition Element')
+
+def findBlock(z, group):
+    if isTransition(z) == True:
+        if 20 < z < 31 or  38 < z < 49 or  71 < z < 81 or  103 < z < 113:
+            return ('d-Block')
+        else:
+            return ('f-Block')
+    else:
+        if group == ('NO FIXED POSITION'):
+            return ('NO FIXED POSITION')
+        elif group <= 2:
+            return ('s-Block')
+        else:
+            return ('p-Block')
+    
 
 
 def bohrPrint(ec):
@@ -363,7 +403,7 @@ OUTPUT
     
 sg.theme("DarkGrey5")
 
-outputLayout = [[sg.Text(">> Element" + " <<\n  >> Element Symbol             >> " + "\n  >> Atomic Number               >> " + "\n  >> Electronic Configuration >> " + "\n  >> Bohr Configuration         >>  ",key='-OUTPUT-')]]
+outputLayout = [[sg.Text(">> Element" + " <<\n  >> Element Symbol             >> " + "\n  >> Atomic Number               >> " + "\n  >> Electronic Configuration >> " + "\n  >> Bohr Configuration         >>  " + "\n  >> Valence Electrons          >>  " + "\n  >> Period                            >>  " + "\n  >> Group                             >>  "  + "\n  >> Block                              >>  " ,key='-OUTPUT-')]]
 inputLayout = [[sg.Text("Please choose method of input :"),sg.Radio("Element Name",group_id="choice",enable_events=True,key=1),sg.Radio("Element Symbol",group_id="choice",enable_events=True,key=2),sg.Radio("Atomic Number",group_id="choice",default=True,enable_events=True,key=3)],
           [sg.Text("Enter your input : "),sg.Input(expand_x=True,pad=(10),enable_events=True, key='-IN-')]]
 layout = [[Frame("Input parameters", inputLayout, title_location=TITLE_LOCATION_TOP,expand_x=True,expand_y=True)],
@@ -390,7 +430,7 @@ while True:
         print("  >> Atomic number            >> ",atomicNumber)
         print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
         print("  >> Bohr Configuration       >> ",)'''
-        outputStr = ">> " + element_name[atomicNumber - 1] + " <<\n  >> Element Symbol             >> " + element_symb[atomicNumber - 1] + "\n  >> Atomic Number               >> " + str(atomicNumber) + "\n  >> Electronic Configuration >> " + electronic_configuration(atomicNumber) + "\n  >> Bohr Configuration         >>  " + bohrPrint(bohrEc()) + "\n  >> Valence Electrons          >>  " + str(valence_e) + "\n  >> Period Number               >>  " + str(period)
+        outputStr = ">> " + element_name[atomicNumber - 1] + " <<\n  >> Element Symbol             >> " + element_symb[atomicNumber - 1] + "\n  >> Atomic Number               >> " + str(atomicNumber) + "\n  >> Electronic Configuration >> " + electronic_configuration(atomicNumber) + "\n  >> Bohr Configuration         >>  " + bohrPrint(bohrEc()) + "\n  >> Valence Electrons          >>  " + str(valence_e) + "\n  >> Period                            >>  " + str(period) + "\n  >> Group                             >>  " + str(findGroup(atomicNumber,valence_e)) + "\n  >> Block                              >>  " + str(findBlock(atomicNumber, findGroup(atomicNumber, valence_e)))
         window['-OUTPUT-'].update(outputStr)
     else: window['-OUTPUT-'].update("\n\n\n\n")
 
