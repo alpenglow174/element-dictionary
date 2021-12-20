@@ -311,11 +311,11 @@ def bohrEc():
         # no of valence electrons is no of electrons is N
         valence_e = R
     elif Q > 0:
-        valence_e = N
+        valence_e = Q
     elif P > 0:
-        valence_e = M
+        valence_e = P
     elif O > 0:
-        valence_e = M
+        valence_e = O
     elif N > 0:
         valence_e = N
     elif M > 0:
