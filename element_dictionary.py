@@ -100,6 +100,15 @@ def atomic_Number():
         atomic_num = input_checker()
     return atomic_num
 
+'''
+TRANSITION
+'''
+def isTransition(z):
+    if 20 < z < 31 or  38 < z < 49 or  56 < z < 81 or  88 < z < 113:
+        return True 
+    else:
+        return False
+
 period = 0
 valence_e = 0
 def bohrEc():
@@ -282,26 +291,27 @@ def bohrEc():
     valence electron
     '''
     global valence_e 
-
-    # setting no of valence electrons (KLMNOPQR)
-    if R > 0:
-        # no of valence electrons is no of electrons is N
-        valence_e = R
-    elif Q > 0:
-        valence_e = Q
-    elif P > 0:
-        valence_e = P
-    elif O > 0:
-        valence_e = O
-    elif N > 0:
-        valence_e = N
-    elif M > 0:
-        valence_e = M
-    elif L > 0:
-        valence_e = L
-    elif K > 0:
-        valence_e = K
-    
+    if isTransition(atomicNumber) == False :
+        # setting no of valence electrons (KLMNOPQR)
+        if R > 0:
+            # no of valence electrons is no of electrons is N
+            valence_e = R
+        elif Q > 0:
+            valence_e = Q
+        elif P > 0:
+            valence_e = P
+        elif O > 0:
+            valence_e = O
+        elif N > 0:
+            valence_e = N
+        elif M > 0:
+            valence_e = M
+        elif L > 0:
+            valence_e = L
+        elif K > 0:
+            valence_e = K
+    else:
+        valence_e = ('Transition Element')
     global period #finding period
     period_temp = 9 #temporary period
     SHELL = [R, Q, P, O, N,  M, L, K ] #list of shells
@@ -312,6 +322,36 @@ def bohrEc():
             break #to stop loop and not continue
 
     return K,L,M,N,O,P,Q,R
+
+def findGroup(z, valence_e):
+    group = 0
+    if isTransition(z) == False:
+        if z == 1:
+            return ('NO FIXED POSITION')
+        elif z == 2:
+            group = 18
+        elif valence_e <= 2 :
+            group = valence_e
+        elif valence_e >= 3 :
+            group = valence_e + 10
+        return group
+    else:
+        return ('Transition Element')
+
+def findBlock(z, group):
+    if isTransition(z) == True:
+        if 20 < z < 31 or  38 < z < 49 or  71 < z < 81 or  103 < z < 113:
+            return ('d-Block')
+        else:
+            return ('f-Block')
+    else:
+        if group == ('NO FIXED POSITION'):
+            return ('NO FIXED POSITION')
+        elif group <= 2:
+            return ('s-Block')
+        else:
+            return ('p-Block')
+    
 
 
 def bohrPrint(ec):
@@ -336,6 +376,8 @@ while program_state == "r":
     print("  >> Atomic number            >> ",atomicNumber)
     print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
     print("  >> Bohr Configuration       >> ",bohrPrint(bohrEc()))
-    print("  >> Period of element            >> ",period)
     print("  >> Valence electron           >> ",valence_e)
+    print("  >> Period of element            >> ",period)
+    print("  >> Group of element            >> ",findGroup(atomicNumber,valence_e))
+    print("  >> Block of element            >> ",findBlock(atomicNumber, findGroup(atomicNumber, valence_e)))
     program_state = input(">> Press r to restart program and q to quit >> ")

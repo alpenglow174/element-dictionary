@@ -158,8 +158,6 @@ def period_fun(shell):
             break #to stop loop and not continue
 print(period_fun((K,L,M,N,O,P,Q,R)))
 
-'''
-
 temporary = 0
 def changeTemp(number):
     global temporary
@@ -167,4 +165,43 @@ def changeTemp(number):
     return temporary
 print(changeTemp(temporary))
 print(temporary)
+'''
 
+
+z = int(input('element = '))
+valence_e = int(input('velence'))
+def isTransition(z):
+    if 20 < z < 31 or  38 < z < 49 or  56 < z < 81 or  88 < z < 113:
+        return True 
+    else:
+        return False
+
+def findGroup(z, valence_e):
+    group = 0
+    if isTransition(z) == False:
+        if z == 1:
+            return (' NO FIXED POSITION ' )
+        elif z == 2:
+            group = 18
+        elif valence_e <= 2 :
+            group = valence_e
+        elif valence_e >= 3 :
+            group = valence_e + 10
+        return group
+    else:
+        return ('Transition we dont give sheet')
+
+def findBlock(z, group):
+    if isTransition(z) == True:
+        if 20 < z < 31 or  38 < z < 49 or  71 < z < 81 or  103 < z < 113:
+            return ('d-Block')
+        else:
+            return ('f-Block')
+    else:
+        if group <= 2:
+            return ('s-Block')
+        else:
+            return ('p-Block')
+
+print(' BLOCK = ',findBlock(z, findGroup(z, valence_e)))
+print (' GROUP = ',findGroup(z, valence_e))
