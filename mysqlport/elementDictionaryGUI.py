@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from PySimpleGUI import TITLE_LOCATION_TOP, Frame
+import mysql.connector as mc
 
 #  ______ _                           _          _____  _      _   _                              
 #  |  ____| |                         | |        |  __ \(_)    | | (_)                             
@@ -134,10 +135,10 @@ def isTransition(z):
 
 period = 0
 valence_e = 0
-def bohrEc():
+def bohrEc(iter):
     # Find EC in Bohr model (KLMN)
     K, L, M, N, O, P, Q, R = 0, 0, 0, 0, 0, 0, 0, 0
-    EC_var = atomicNumber
+    EC_var = iter
 
     # 2,8,8,16,16,32
     # Cr, Cu, Nb, Pd, Ce, Ce, Tb, Pa, Bk
@@ -237,7 +238,7 @@ def bohrEc():
         
 
     #the exceptions:
-    if atomicNumber == 24:#Cr
+    if iter == 24:#Cr
         K = 2
         L = 8
         M = 13
@@ -246,7 +247,7 @@ def bohrEc():
         P = 0
         Q = 0
         R = 0
-    elif atomicNumber == 29:#Cu
+    elif iter == 29:#Cu
         K = 2
         L = 8
         M = 18
@@ -255,7 +256,7 @@ def bohrEc():
         P = 0
         Q = 0
         R = 0
-    elif atomicNumber == 41:#Nb
+    elif iter == 41:#Nb
         K = 2
         L = 8
         M = 18
@@ -264,7 +265,7 @@ def bohrEc():
         P = 0
         Q = 0
         R = 0
-    elif atomicNumber == 46:#Pd
+    elif iter == 46:#Pd
         K = 2
         L = 8
         M = 18
@@ -273,7 +274,7 @@ def bohrEc():
         P = 0
         Q = 0
         R = 0
-    elif atomicNumber == 58:#Ce
+    elif iter == 58:#Ce
         K = 2
         L = 8
         M = 18
@@ -282,7 +283,7 @@ def bohrEc():
         P = 2
         Q = 0
         R = 0
-    elif atomicNumber == 65:#Tb
+    elif iter == 65:#Tb
         K = 2
         L = 8
         M = 18
@@ -291,7 +292,7 @@ def bohrEc():
         P = 2
         Q = 0
         R = 0
-    elif atomicNumber == 91:#Pa
+    elif iter == 91:#Pa
         K = 2
         L = 8
         M = 18
@@ -300,7 +301,7 @@ def bohrEc():
         P = 9
         Q = 2
         R = 0
-    elif atomicNumber == 97:#Bk
+    elif iter == 97:#Bk
         K = 2
         L = 8
         M = 18
@@ -314,7 +315,7 @@ def bohrEc():
     valence electron
     '''
     global valence_e 
-    if isTransition(atomicNumber) == False :
+    if isTransition(iter) == False :
         # setting no of valence electrons (KLMNOPQR)
         if R > 0:
             # no of valence electrons is no of electrons is N
@@ -376,7 +377,6 @@ def findBlock(z, group):
             return ('p-Block')
     
 
-
 def bohrPrint(ec):
     ecString = ''
     for i in ec:
@@ -386,31 +386,43 @@ def bohrPrint(ec):
         ecString+=', '
     return ecString.rstrip(', ')
 
-
-
-'''
-OUTPUT
-'''
-'''program_state = "r"'''
-'''while program_state == "r":
-    atomicNumber = atomic_Number()
-    #For later formatting convenience
-    print(">>",element_name[atomicNumber - 1], "<<") #Displays element for reference during testing
-    print("  >> Atomic number            >> ",atomicNumber)
-    print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
-    print("  >> Bohr Configuration       >> ",bohrPrint(bohrEc()))
-    program_state = input(">> Press r to restart program and q to quit >> ")'''
-    
+def tablegen(pw,db):
+    try:
+        # Gen sql table
+        sess = mc.connect(host='localhost',user='root',password=pw,database=db)
+        cur = sess.cursor()
+        cur.execute("create table elementdictionarydb(name varchar(255),symbol varchar(255),atomicnumber int primary key,electronicconfiguration varchar(255),bohrconfig varchar(255), valenceelectrons varchar(255),period varchar(255),ptgroup varchar(255),block varchar(255));")
+        for i in range(len(element_name)):
+            iter = i + 1
+            cur.execute("insert into elementdictionarydb values(%s,%s,%s,N%s,%s,%s,%s,%s,%s);",(element_name[iter - 1],element_symb[iter - 1],iter,electronic_configuration(iter),bohrPrint(bohrEc(iter)),valence_e,period,str(findGroup(iter,valence_e)),str(findBlock(iter, findGroup(iter, valence_e)))))
+        sess.commit()
+        return sess,cur
+    except mc.Error:
+        return -1
 sg.theme("DarkGrey5")
 
 outputLayout = [[sg.Text(">> Element" + " <<\n  >> Element Symbol             >> " + "\n  >> Atomic Number               >> " + "\n  >> Electronic Configuration >> " + "\n  >> Bohr Configuration         >>  " + "\n  >> Valence Electrons          >>  " + "\n  >> Period                            >>  " + "\n  >> Group                             >>  "  + "\n  >> Block                              >>  " ,key='-OUTPUT-')]]
-inputLayout = [[sg.Text("Please choose method of input :"),sg.Radio("Element Name",group_id="choice",enable_events=True,key=1),sg.Radio("Element Symbol",group_id="choice",enable_events=True,key=2),sg.Radio("Atomic Number",group_id="choice",default=True,enable_events=True,key=3)],
+inputLayout = [[sg.Text("Enter database password : "),sg.Input(pad=(10),enable_events=True, key='-PW-',size=(20,1),password_char='*'),sg.Text("Enter database name : "),sg.Input(pad=(10),enable_events=True, key='-DB-',size=(20,1))],[sg.Text("Please choose method of input :"),sg.Radio("Element Name",group_id="choice",enable_events=True,key=1),sg.Radio("Element Symbol",group_id="choice",enable_events=True,key=2),sg.Radio("Atomic Number",group_id="choice",default=True,enable_events=True,key=3)],
           [sg.Text("Enter your input : "),sg.Input(expand_x=True,pad=(10),enable_events=True, key='-IN-')]]
-layout = [[Frame("Input parameters", inputLayout, title_location=TITLE_LOCATION_TOP,expand_x=True,expand_y=True)],
+layout = [[Frame("Input parameters", inputLayout, key='-FRAME-', title_location=TITLE_LOCATION_TOP,expand_x=True,expand_y=True)],
           [Frame("Element Description",outputLayout, title_location=TITLE_LOCATION_TOP, expand_x=True, expand_y=True)]]
 
 window = sg.Window("Element dictionary", layout,margins=(10,10),scaling=1.8)
 
+while True:
+    event, values = window.read()
+    if event == sg.WINDOW_CLOSED:
+        break
+    if values is not None and values['-PW-'] is not None and values['-DB-'] is not None:
+        i = tablegen(values['-PW-'],values['-DB-'])
+        if i == -1:
+            continue
+        else:
+            window['-FRAME-'].Update("Input parameters[Logged in]")
+            global sess
+            global cur
+            sess,cur = i[0],i[1]
+            break
 while True:
     event, values = window.read()
     if event == sg.WINDOW_CLOSED:
@@ -426,12 +438,11 @@ while True:
         input_type = 3
     if validityChecker(values['-IN-'],input_type) == True:
         atomicNumber = int(atomic_Number(values['-IN-'], input_type))
-        '''print(">>",element_name[atomicNumber - 1], "<<") #Displays element for reference during testing
-        print("  >> Atomic number            >> ",atomicNumber)
-        print("  >> Electronic configuration >> ",electronic_configuration(atomicNumber))
-        print("  >> Bohr Configuration       >> ",)'''
-        outputStr = ">> " + element_name[atomicNumber - 1] + " <<\n  >> Element Symbol             >> " + element_symb[atomicNumber - 1] + "\n  >> Atomic Number               >> " + str(atomicNumber) + "\n  >> Electronic Configuration >> " + electronic_configuration(atomicNumber) + "\n  >> Bohr Configuration         >>  " + bohrPrint(bohrEc()) + "\n  >> Valence Electrons          >>  " + str(valence_e) + "\n  >> Period                            >>  " + str(period) + "\n  >> Group                             >>  " + str(findGroup(atomicNumber,valence_e)) + "\n  >> Block                              >>  " + str(findBlock(atomicNumber, findGroup(atomicNumber, valence_e)))
+        cur.execute("select * from elementdictionarydb where atomicnumber=%s;",(atomicNumber,))
+        x = cur.fetchone()
+        outputStr = ">> " + x[0] + " <<\n  >> Element Symbol             >> " + x[1] + "\n  >> Atomic Number               >> " + str(x[2]) + "\n  >> Electronic Configuration >> " + x[3] + "\n  >> Bohr Configuration         >>  " + x[4] + "\n  >> Valence Electrons          >>  " + str(x[5]) + "\n  >> Period                            >>  " + str(x[6]) + "\n  >> Group                             >> " + str(x[7]) +  "\n  >> Block                              >>  " + x[8]
         window['-OUTPUT-'].update(outputStr)
     else: window['-OUTPUT-'].update("\n\n\n\n")
 
 window.close()
+cur.execute("drop table elementdictionarydb")
